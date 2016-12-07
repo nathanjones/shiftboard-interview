@@ -42,6 +42,10 @@ public class Person {
     @SerializedName("friends")
     private List<Person> friends = null;
 
+    public Person() {
+
+    }
+
     public Person(String id, String username) {
         this.id = id;
         this.username = username;

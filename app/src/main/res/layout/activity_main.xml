@@ -5,12 +5,14 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context="com.nathanrjones.shiftboard.ui.main.MainActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_marginBottom="16dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/person_image"
@@ -19,8 +21,10 @@
             android:layout_marginEnd="16dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
+
         <TextView
             android:id="@+id/person_name"
+            android:text="Nathan Jones"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -28,6 +32,7 @@
 
         <TextView
             android:id="@+id/person_email"
+            android:text="paging@drjon.es"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/person_name"
@@ -44,6 +49,7 @@
 
     <TextView
         android:id="@+id/person_address"
+        android:text="1712 Rockland Dr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp" />
@@ -56,6 +62,7 @@
 
     <TextView
         android:id="@+id/person_phone"
+        android:text="(512) 633-9576"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp" />
