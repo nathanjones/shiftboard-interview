@@ -33,6 +33,11 @@ public interface MainScreen {
     interface Presenter extends MvpPresenter<View> {
 
         void initialize(@Nullable String personId);
+
+        void showPerson(Person person);
+
+        void showRandomPerson();
+
     }
 
 }

@@ -7,8 +7,6 @@ import com.nathanrjones.shiftboard.data.model.Person;
 import com.nathanrjones.shiftboard.data.repository.PersonRepository;
 
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 import static java.lang.String.format;
 import static rx.android.schedulers.AndroidSchedulers.mainThread;
@@ -46,36 +44,52 @@ public class MainPresenter implements MainScreen.Presenter {
 
     @Override
     public void initialize(@Nullable String personId) {
+        loadPerson(personId);
+    }
 
-        if (getView() != null) {
-            getView().showLoading();
-        }
+    @Override
+    public void showPerson(Person person) {
+        displayPerson(person);
+    }
 
-        getPerson(personId)
+    @Override
+    public void showRandomPerson() {
+        loadPerson(null);
+    }
+
+    private void loadPerson(@Nullable String id) {
+
+        getPerson(id)
                 .observeOn(mainThread())
                 .subscribeOn(io())
                 .subscribe(person ->  {
 
-                    if (getView() == null) return;
-
-                    getView().showPersonImage(person.getImageUrl());
-                    getView().showPersonName(format("%s %s", person.getFirstName(), person.getLastName()));
-                    getView().showPersonEmail(person.getEmail());
-                    getView().showPersonAddress(
-                            person.getAddressStreet(),
-                            format("%s, %s %s",
-                                    person.getAddressCity(),
-                                    person.getAddressState(),
-                                    person.getAddressZipcode()
-                            )
-                    );
-                    getView().showPersonPhone(person.getPhoneNumber());
-                    getView().showPersonFriends(person.getFriends());
+                    displayPerson(person);
 
                 }, e -> {
                     Log.e(TAG, "Could not load person", e);
                     e.printStackTrace();
                 });
+    }
+
+    private void displayPerson(Person person) {
+
+        if (getView() == null) return;
+
+        getView().showPersonImage(person.getImageUrl());
+        getView().showPersonName(format("%s %s", person.getFirstName(), person.getLastName()));
+        getView().showPersonEmail(person.getEmail());
+        getView().showPersonAddress(
+                person.getAddressStreet(),
+                format("%s, %s %s",
+                        person.getAddressCity(),
+                        person.getAddressState(),
+                        person.getAddressZipcode()
+                )
+        );
+        getView().showPersonPhone(person.getPhoneNumber());
+        getView().showPersonFriends(person.getFriends());
+
     }
 
     private Observable<Person> getPerson(@Nullable String id) {

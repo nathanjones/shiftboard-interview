@@ -1,8 +1,8 @@
 package com.nathanrjones.shiftboard.ui.main;
 
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -19,17 +19,16 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.android.schedulers.AndroidSchedulers;
 
 import static android.support.design.widget.Snackbar.LENGTH_SHORT;
 import static android.view.View.VISIBLE;
 import static java.lang.String.format;
-import static rx.android.schedulers.AndroidSchedulers.mainThread;
 import static rx.schedulers.Schedulers.io;
 
 public class MainActivity extends AppCompatActivity implements MainScreen.View {
@@ -121,6 +120,11 @@ public class MainActivity extends AppCompatActivity implements MainScreen.View {
     @Override
     public void showLoading() {
         Snackbar.make(container, "Loading...", LENGTH_SHORT).show();
+    }
+
+    @OnClick(R.id.person_image)
+    void onLoadNewPersonClicked() {
+        presenter.showRandomPerson();
     }
 
     /**
