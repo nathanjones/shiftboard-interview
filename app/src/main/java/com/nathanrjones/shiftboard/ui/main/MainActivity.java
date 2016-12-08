@@ -30,6 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static android.support.design.widget.Snackbar.LENGTH_SHORT;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
+import static com.nathanrjones.shiftboard.ui.view.PersonSummaryView.Style.Large;
 import static rx.schedulers.Schedulers.io;
 
 public class MainActivity extends AppCompatActivity implements MainScreen.View {
@@ -55,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements MainScreen.View {
         ButterKnife.bind(this);
 
         setTitle("People With Friends");
+
+        personSummary.setStyle(Large);
     }
 
     @Override

@@ -28,6 +28,10 @@ public class PersonSummaryView extends RelativeLayout {
     @Bind(R.id.person_name) TextView personName;
     @Bind(R.id.person_email) TextView personEmail;
 
+    public enum Style {
+        Default, Large
+    }
+
     public PersonSummaryView(Context context) {
         this(context, null);
     }
@@ -64,6 +68,17 @@ public class PersonSummaryView extends RelativeLayout {
                     .into(personImage);
         }
 
+    }
+
+    public void setStyle(Style style) {
+
+        int imageSize = style == Style.Large ? dpToPx(72) : dpToPx(40);
+
+        personImage.getLayoutParams().width = imageSize;
+        personImage.getLayoutParams().height = imageSize;
+        personImage.requestLayout();
+
+        personName.setTextSize(style == Style.Large ? 24 : 16);
     }
 
     private String formatName(Person person) {
