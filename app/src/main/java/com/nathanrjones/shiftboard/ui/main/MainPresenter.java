@@ -86,15 +86,20 @@ public class MainPresenter implements MainScreen.Presenter {
 
         getView().showPersonSummary(person);
         getView().showPersonAddress(
-                person.getAddressStreet(),
-                format("%s, %s %s",
+                format("%s\n%s, %s %s",
+                        person.getAddressStreet(),
                         person.getAddressCity(),
                         person.getAddressState(),
                         person.getAddressZipcode()
                 )
         );
         getView().showPersonPhone(person.getPhoneNumber());
-        getView().showPersonFriends(person.getFriends());
+
+        if (!person.getFriends().isEmpty()) {
+            getView().showPersonFriends(person.getFriends());
+        } else {
+            getView().hidePersonFriends();
+        }
 
     }
 

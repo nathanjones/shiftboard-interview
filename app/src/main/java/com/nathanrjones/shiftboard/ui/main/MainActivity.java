@@ -27,8 +27,8 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.support.design.widget.Snackbar.LENGTH_SHORT;
+import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
-import static java.lang.String.format;
 import static rx.schedulers.Schedulers.io;
 
 public class MainActivity extends AppCompatActivity implements MainScreen.View {
@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen.View {
     @Bind(R.id.person_address) TextView personAddress;
     @Bind(R.id.person_phone) TextView personPhone;
     @Bind(R.id.person_friends) LinearLayout personFriends;
+    @Bind(R.id.container_friends) ViewGroup containerFriends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements MainScreen.View {
     }
 
     @Override
-    public void showPersonAddress(String addressLineOne, String addressLineTwo) {
-        personAddress.setText(format("%s\n%s", addressLineOne, addressLineTwo));
+    public void showPersonAddress(String address) {
+        personAddress.setText(address);
         personAddress.setVisibility(VISIBLE);
     }
 
@@ -102,6 +103,14 @@ public class MainActivity extends AppCompatActivity implements MainScreen.View {
 
             personFriends.addView(personView);
         }
+
+        containerFriends.setVisibility(VISIBLE);
+    }
+
+    @Override
+    public void hidePersonFriends() {
+        personFriends.removeAllViews();
+        containerFriends.setVisibility(GONE);
     }
 
     @Override

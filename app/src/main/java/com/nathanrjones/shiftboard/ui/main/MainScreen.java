@@ -18,12 +18,13 @@ public interface MainScreen {
 
         void showPersonSummary(Person person);
 
-        void showPersonAddress(String addressLineOne, String addressLineTwo);
+        void showPersonAddress(String address);
 
         void showPersonPhone(String phone);
 
         void showPersonFriends(List<Person> friends);
 
+        void hidePersonFriends();
     }
 
     interface Presenter extends MvpPresenter<View> {
