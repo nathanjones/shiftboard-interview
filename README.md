@@ -1,6 +1,6 @@
 # Shiftboard Interview
 
-[Download](app-debug.apk)
+[Download](app-debug.apk?raw=true)
 
 ## Screenshots
 
