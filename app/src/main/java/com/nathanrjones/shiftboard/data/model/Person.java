@@ -36,8 +36,8 @@ public class Person {
     @SerializedName("state")
     private String addressState = null;
 
-    @SerializedName("zipcode")
-    private String addressZipcode;
+    @SerializedName("zipCode")
+    private String addressZipcode = null;
 
     @SerializedName("friends")
     private List<Person> friends = null;

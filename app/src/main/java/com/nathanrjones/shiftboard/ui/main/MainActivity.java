@@ -9,11 +9,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.nathanrjones.shiftboard.R;
 import com.nathanrjones.shiftboard.data.api.PersonApi;
 import com.nathanrjones.shiftboard.data.model.Person;
 import com.nathanrjones.shiftboard.data.repository.PersonRepository;
+import com.nathanrjones.shiftboard.ui.view.PersonSummaryView;
 
 import java.util.List;
 
@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen.View {
     private MainPresenter presenter;
 
     @Bind(R.id.container) ViewGroup container;
+    @Bind(R.id.person_summary) PersonSummaryView personSummary;
     @Bind(R.id.person_image) ImageView personImage;
     @Bind(R.id.person_name) TextView personName;
     @Bind(R.id.person_email) TextView personEmail;
@@ -69,22 +70,8 @@ public class MainActivity extends AppCompatActivity implements MainScreen.View {
     }
 
     @Override
-    public void showPersonImage(String imageUrl) {
-        Glide.with(this)
-                .load(imageUrl)
-                .into(personImage);
-    }
-
-    @Override
-    public void showPersonName(String name) {
-        personName.setText(name);
-        personName.setVisibility(VISIBLE);
-    }
-
-    @Override
-    public void showPersonEmail(String email) {
-        personEmail.setText(email);
-        personEmail.setVisibility(VISIBLE);
+    public void showPersonSummary(Person person) {
+        personSummary.setPerson(person);
     }
 
     @Override
@@ -106,11 +93,11 @@ public class MainActivity extends AppCompatActivity implements MainScreen.View {
         
         for (Person friend : friends) {
 
-            TextView personView = new TextView(this);
+            PersonSummaryView personView = new PersonSummaryView(this);
 
-            personView.setText(friend.getFirstName());
+            personView.setPerson(friend);
             personView.setOnClickListener(v -> {
-
+                presenter.showPerson(friend);
             });
 
             personFriends.addView(personView);

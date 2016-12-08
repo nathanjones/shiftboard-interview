@@ -16,11 +16,7 @@ public interface MainScreen {
 
     interface View extends MvpView {
 
-        void showPersonImage(String imageUrl);
-
-        void showPersonName(String name);
-
-        void showPersonEmail(String email);
+        void showPersonSummary(Person person);
 
         void showPersonAddress(String addressLineOne, String addressLineTwo);
 

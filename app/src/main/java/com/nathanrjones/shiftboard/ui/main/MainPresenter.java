@@ -48,8 +48,16 @@ public class MainPresenter implements MainScreen.Presenter {
     }
 
     @Override
-    public void showPerson(Person person) {
-        displayPerson(person);
+    public void showPerson(Person friend) {
+
+        personRepo.getPerson(friend.getId())
+                .observeOn(mainThread())
+                .subscribe(person -> {
+                    displayPerson(person);
+                }, e -> {
+                    Log.e(TAG, "Could not load friend", e);
+                    e.printStackTrace();
+                });
     }
 
     @Override
@@ -76,9 +84,7 @@ public class MainPresenter implements MainScreen.Presenter {
 
         if (getView() == null) return;
 
-        getView().showPersonImage(person.getImageUrl());
-        getView().showPersonName(format("%s %s", person.getFirstName(), person.getLastName()));
-        getView().showPersonEmail(person.getEmail());
+        getView().showPersonSummary(person);
         getView().showPersonAddress(
                 person.getAddressStreet(),
                 format("%s, %s %s",
